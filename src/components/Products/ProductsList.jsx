@@ -2,7 +2,7 @@ import React, { use, useEffect, useState } from "react";
 
 import ProductCard from "./ProductCard";
 import "./ProductsList.css";
-import useData from "../../hooks/UseData";
+import useData from "../../hooks/useData";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../Common/Pagination";
