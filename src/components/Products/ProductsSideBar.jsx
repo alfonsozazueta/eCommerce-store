@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProductsSideBar.css";
 import LinkWithIcon from "../Navbar/LinkWithIcon";
-import useData from "../../hooks/UseData";
+import useData from "../../hooks/useData";
 
 const ProductsSideBar = () => {
   const { data: categories, error } = useData("/category");
