@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { memo, useContext, useMemo } from "react";
 import UserContext from "../../contexts/userContext";
 import "./CartPage.css";
 import Table from "../Common/Table";
@@ -6,20 +6,20 @@ import QuantityInput from "../SingleProduct/QuantityInput";
 import remove from "../../assets/remove.png";
 import CartContext from "../../contexts/CartContext";
 import { checkoutApi } from "../../services/orderServices";
+import config from "../../config.json";
 import { toast } from "react-toastify";
 
 const CartPage = () => {
-  const [subtotal, setSubtotal] = useState(0);
   const user = useContext(UserContext);
   const { cart, removeFromCart, updateCart, setCart } = useContext(CartContext);
 
-  useEffect(() => {
+  const subtotal = useMemo(() => {
     let total = 0;
     cart.forEach((item) => {
       total += item.product.price * item.quantity;
     });
 
-    setSubtotal(total);
+    return total;
   }, [cart]);
 
   const checkout = () => {
@@ -39,7 +39,7 @@ const CartPage = () => {
     <section className="align_center cart_page">
       <div className="align_center user_info">
         <img
-          src={`http://localhost:5000/profile/${user?.profilePic}`}
+          src={`${config.backendURL}/profile/${user?.profilePic}`}
           alt="user profile"
         />
         <div>
@@ -98,4 +98,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default memo(CartPage);
